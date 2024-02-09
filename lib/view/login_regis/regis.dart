@@ -10,6 +10,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todo_app/controller/notifications/notif.dart';
 import 'package:todo_app/cubit/auth_cubit.dart';
 import 'package:todo_app/widget/button.dart';
+import 'package:todo_app/widget/buttonsmall.dart';
 
 class Regis extends StatefulWidget {
   const Regis({super.key});
@@ -21,7 +22,6 @@ class Regis extends StatefulWidget {
 enum Buttonstate { init, loaded, succes }
 
 class _RegisState extends State<Regis> {
-  bool isScretch = true;
   @override
   void initState() {
     AwesomeNotifications().setListeners(
@@ -35,6 +35,8 @@ class _RegisState extends State<Regis> {
   Buttonstate state = Buttonstate.init;
   @override
   Widget build(BuildContext context) {
+    final isDOne = state == Buttonstate.succes;
+    final isScretch = state == Buttonstate.init;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -140,17 +142,15 @@ class _RegisState extends State<Regis> {
                             ),
                             errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.red),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                             )),
                       ),
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: SizedBox(
-                    width: 327,
-                    height: 48,
-                    child: isScretch ? buttonInit(context) : buttonSmall()),
-              ),
+                  padding: const EdgeInsets.only(top: 50),
+                  child: isScretch ? buttonInit(context) : buttonSmall(isDOne)),
             ],
           ),
           Padding(
@@ -178,40 +178,46 @@ class _RegisState extends State<Regis> {
     );
   }
 
-  ElevatedButton buttonInit(BuildContext context) {
-    return ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-            shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))))),
-        onPressed: () async {
-          if (passKey.currentState!.validate() &&
-              confirmKey.currentState!.validate()) {}
+  SizedBox buttonInit(BuildContext context) {
+    return SizedBox(
+      width: 327,
+      height: 48,
+      child: ElevatedButton(
+          style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+              shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5))))),
+          onPressed: () async {
+            if (passKey.currentState!.validate() ==
+                confirmKey.currentState!.validate()) {
+              setState(() => state = Buttonstate.loaded);
+              await Future.delayed(const Duration(seconds: 2));
+              setState(() => state = Buttonstate.succes);
+              await Future.delayed(const Duration(seconds: 2));
+              setState(() => state = Buttonstate.init);
+            } else {
+              return;
+            }
 
-          context.read<AuthCubit>().singUp(email.text, password.text);
+            // ignore: use_build_context_synchronously
+            context.read<AuthCubit>().singUp(email.text, password.text);
 
-          Future.delayed(const Duration(seconds: 2), () {
-            AwesomeNotifications().createNotification(
-              content: NotificationContent(
-                  id: 1,
-                  channelKey: 'UserNew',
-                  title:
-                      email.text.isEmpty ? 'Helo User' : 'Hello ${email.text}',
-                  body: 'Let\'s Make your daily more productive!!!'),
-            );
-          });
-        },
-        child: const Text('Register'));
-  }
+            Future.delayed(const Duration(seconds: 1), () {
+              AwesomeNotifications().createNotification(
+                content: NotificationContent(
+                    id: 1,
+                    channelKey: 'UserNew',
+                    title: email.text.isEmpty
+                        ? 'Helo User'
+                        : 'Hello ${email.text}',
+                    body: 'Let\'s Make your daily more productive!!!'),
+              );
 
-  ElevatedButton buttonSmall() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Container(
-        decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: Colors.blueGrey),
-        child: const CircularProgressIndicator(),
-      ),
+              Get.offAllNamed('/Home');
+            });
+          },
+          child: const Text('Register')),
     );
   }
 }

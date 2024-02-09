@@ -2,10 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:todo_app/view/detail_menu/detail1.dart';
 import 'package:todo_app/view/detail_menu/detail2.dart';
 import 'package:todo_app/view/detail_menu/detail3.dart';
 import 'package:todo_app/view/detail_menu/detail4.dart';
+import 'package:todo_app/widget/dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,12 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: PageStorage(
         bucket: bucket,
         child: indexPage[bottomIndex],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          dialog();
+        },
         backgroundColor: Colors.blueGrey,
         hoverColor: Colors.green,
         splashColor: Colors.green,
@@ -64,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: animateBottom(bottomIndex, iconns, updatePage),
     );
   }
+
+ 
 }
 
 AnimatedBottomNavigationBar animateBottom(

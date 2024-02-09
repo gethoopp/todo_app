@@ -18,6 +18,7 @@ import 'package:todo_app/localdata/data.dart';
 import 'package:todo_app/splashscreen/splash_screen.dart';
 
 import 'package:path_provider/path_provider.dart';
+
 import 'package:todo_app/view/main_page/home.dart';
 
 //
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
             getPages: approute(),
             title: 'Flutter app Todo',
             theme: ThemeData.dark(),
-            home: const Splash()),
+            home: const HomeScreen()),
       ),
     );
   }

@@ -10,7 +10,9 @@ import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/controller/notifications/notif.dart';
 
 import 'package:todo_app/cubit/auth_cubit.dart';
+
 import 'package:todo_app/widget/button.dart';
+import 'package:todo_app/widget/buttonsmall.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,6 +20,8 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
+
+enum ButtonState { init, loaded, succes }
 
 class _LoginState extends State<Login> {
   @override
@@ -30,8 +34,12 @@ class _LoginState extends State<Login> {
     super.initState();
   }
 
+  ButtonState state = ButtonState.init;
+
   @override
   Widget build(BuildContext context) {
+    final isStrect = state == ButtonState.init;
+    final isDone = state == ButtonState.succes;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -84,7 +92,9 @@ class _LoginState extends State<Login> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.only(top: size.height * 0.05),
+                padding: EdgeInsets.only(
+                  top: size.height * 0.05,
+                ),
                 child: SizedBox(
                     width: 327,
                     height: 48,
@@ -107,23 +117,7 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 50),
-                child: SizedBox(
-                    width: 327,
-                    height: 48,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.blueGrey),
-                            shape: MaterialStateProperty.all(
-                                const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5))))),
-                        onPressed: () async {
-                          context
-                              .read<AuthCubit>()
-                              .login(email.text, password.text);
-                        },
-                        child: const Text('Login'))),
+                child: isStrect ? buttonInit(context) : buttonSmall(isDone),
               ),
             ],
           ),
@@ -150,5 +144,21 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
+  }
+
+  SizedBox buttonInit(BuildContext context) {
+    return SizedBox(
+        width: 327,
+        height: 48,
+        child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5))))),
+            onPressed: () async {
+              context.read<AuthCubit>().login(email.text, password.text);
+              Get.offAllNamed('/Home');
+            },
+            child: const Text('Login')));
   }
 }
