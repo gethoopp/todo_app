@@ -5,9 +5,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
+import 'package:todo_app/view/login_regis/login.dart';
+import 'package:todo_app/view/login_regis/regis.dart';
 
 class WelcomeBoard extends StatelessWidget {
-  const WelcomeBoard({super.key});
+  final Isar isar;
+  const WelcomeBoard({super.key,required this.isar});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +86,7 @@ class WelcomeBoard extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))))),
                           onPressed: () {
-                            Get.toNamed('/Login');
+                            Get.to( () => Login(isar: isar), transition: Transition.downToUp);
                           },
                           child: const Text('Login'))),
                 ],
@@ -108,7 +112,7 @@ class WelcomeBoard extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10))))),
                       onPressed: () {
-                        Get.toNamed('/Regis');
+                        Get.to(Regis(isar: isar),transition: Transition.downToUp);
                       },
                       child: const Text('Create Account')),
                 ),

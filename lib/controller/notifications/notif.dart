@@ -1,7 +1,6 @@
 //this clas to maake a local notification
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:todo_app/view/login_regis/regis.dart';
-import 'package:get/get.dart';
+
 
 class NotifCall {
   @pragma("vm:entry-point")

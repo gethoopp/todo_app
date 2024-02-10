@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:todo_app/controller/controller.dart';
 
+// ignore: non_constant_identifier_names
 Column introMethod(Size size, VoidCallback UpdateState,
     {required String images,
     required String text,

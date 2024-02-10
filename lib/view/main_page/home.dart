@@ -1,9 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore: depend_on_referenced_packages
-import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:isar/isar.dart';
+import 'package:todo_app/localdata/data.dart';
+
+
 import 'package:todo_app/view/detail_menu/detail1.dart';
 import 'package:todo_app/view/detail_menu/detail2.dart';
 import 'package:todo_app/view/detail_menu/detail3.dart';
@@ -11,7 +14,11 @@ import 'package:todo_app/view/detail_menu/detail4.dart';
 import 'package:todo_app/widget/dialog.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Isar isar;
+  const HomeScreen({
+    super.key,
+    required this.isar,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,24 +39,35 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  List<Widget> indexPage = [
-    const Detail1(
-      key: PageStorageKey('page1'),
-    ),
-    const Detail2(
-      key: PageStorageKey('page2'),
-    ),
-    const Detail3(
-      key: PageStorageKey('page3'),
-    ),
-    const Detail4(
-      key: PageStorageKey('page4'),
-    ),
-  ];
+
+   late List<Widget> indexPage;
+
+  @override
+  void initState() {
+    super.initState();
+   final isar = widget.isar;
+    indexPage = [
+      Detail1(
+        isar: isar,
+        key: const PageStorageKey('page1'),
+      ),
+      const Detail2(
+        key: PageStorageKey('page2'),
+      ),
+      const Detail3(
+        key: PageStorageKey('page3'),
+      ),
+      const Detail4(
+        key: PageStorageKey('page4'),
+      ),
+    ];
+  }
 
   final PageStorageBucket bucket = PageStorageBucket();
+  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: PageStorage(
@@ -58,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dialog();
+          print(widget.isar.datas.count().toString());
+          dialog(widget.isar);
+          
         },
         backgroundColor: Colors.blueGrey,
         hoverColor: Colors.green,
@@ -70,8 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: animateBottom(bottomIndex, iconns, updatePage),
     );
   }
-
- 
 }
 
 AnimatedBottomNavigationBar animateBottom(

@@ -10,6 +10,8 @@ TextEditingController email = TextEditingController();
 TextEditingController password = TextEditingController();
 TextEditingController confitmkey = TextEditingController();
 TextEditingController confitmPassword = TextEditingController();
+TextEditingController task = TextEditingController();
+TextEditingController descript = TextEditingController();
 final passKey = GlobalKey<FormState>();
 final confirmKey = GlobalKey<FormState>();
 

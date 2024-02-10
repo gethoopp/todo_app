@@ -5,15 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todo_app/controller/notifications/notif.dart';
 import 'package:todo_app/cubit/auth_cubit.dart';
+import 'package:todo_app/view/main_page/home.dart';
 import 'package:todo_app/widget/button.dart';
 import 'package:todo_app/widget/buttonsmall.dart';
 
 class Regis extends StatefulWidget {
-  const Regis({super.key});
+  final Isar isar;
+  const Regis({super.key, required this.isar});
 
   @override
   State<Regis> createState() => _RegisState();
@@ -214,7 +217,7 @@ class _RegisState extends State<Regis> {
                     body: 'Let\'s Make your daily more productive!!!'),
               );
 
-              Get.offAllNamed('/Home');
+              Get.offAll(HomeScreen(isar: widget.isar) );
             });
           },
           child: const Text('Register')),

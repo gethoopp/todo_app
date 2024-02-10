@@ -3,11 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:isar/isar.dart';
+import 'package:todo_app/welcome_board.dart';
 
 import 'package:todo_app/widget/intro.dart';
 
 class Page3 extends StatefulWidget {
-  const Page3({super.key});
+  final Isar isar;
+  const Page3({super.key, required this.isar});
 
   @override
   State<Page3> createState() => _Page3State();
@@ -18,7 +21,8 @@ class _Page3State extends State<Page3> {
   void UpdateState() {
     setState(() {
       setState(() {
-        Get.toNamed('/WelcomeBoard');
+        Get.to(WelcomeBoard(isar: widget.isar),
+            transition: Transition.leftToRight);
       });
     });
   }

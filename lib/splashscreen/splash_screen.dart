@@ -5,9 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
+import 'package:todo_app/view/intro_page/intro_page1.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({super.key});
+  final Isar isar;
+  const Splash({super.key,required this.isar});
 
   @override
   State<Splash> createState() => _MyWidgetState();
@@ -19,7 +22,7 @@ class _MyWidgetState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offAllNamed('/intro1');
+      Get.offAll(Page1(isar: widget.isar));
     });
   }
 

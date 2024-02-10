@@ -6,16 +6,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/controller/notifications/notif.dart';
 
 import 'package:todo_app/cubit/auth_cubit.dart';
+import 'package:todo_app/view/login_regis/regis.dart';
+import 'package:todo_app/view/main_page/home.dart';
 
 import 'package:todo_app/widget/button.dart';
 import 'package:todo_app/widget/buttonsmall.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  final Isar isar;
+  const Login({super.key,required this.isar});
 
   @override
   State<Login> createState() => _LoginState();
@@ -156,8 +160,23 @@ class _LoginState extends State<Login> {
                 shape: MaterialStateProperty.all(const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5))))),
             onPressed: () async {
+              setState(() => Buttonstate.loaded);
+              Future.delayed(const Duration(seconds: 2));
+              setState(() => Buttonstate.succes);
+              Future.delayed(const Duration(seconds: 2));
+              setState(() => Buttonstate.init);
+
               context.read<AuthCubit>().login(email.text, password.text);
-              Get.offAllNamed('/Home');
+                AwesomeNotifications().createNotification(
+                content: NotificationContent(
+                    id: 1,
+                    channelKey: 'UserNew',
+                    title: email.text.isEmpty
+                        ? 'Helo User'
+                        : 'Hello ${email.text} Welcome Back',
+                    body: 'Ready To Be More Productive?'),
+              );
+               Get.offAll(HomeScreen(isar: widget.isar));
             },
             child: const Text('Login')));
   }

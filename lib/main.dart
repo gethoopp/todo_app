@@ -10,14 +10,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:isar/isar.dart';
 
+
 import 'package:todo_app/controller/routes/routes.dart';
 import 'package:todo_app/cubit/auth_cubit.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/localdata/data.dart';
 
-import 'package:todo_app/splashscreen/splash_screen.dart';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:todo_app/splashscreen/splash_screen.dart';
 
 import 'package:todo_app/view/main_page/home.dart';
 
@@ -53,6 +54,8 @@ void main() async {
   runApp(MyApp(isar: isar));
 }
 
+
+
 class MyApp extends StatelessWidget {
   final Isar isar;
   const MyApp({super.key, required this.isar});
@@ -60,15 +63,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: BlocProvider(
         create: (context) => AuthCubit(),
         child: GetMaterialApp(
-            getPages: approute(),
+           
             title: 'Flutter app Todo',
             theme: ThemeData.dark(),
-            home: const HomeScreen()),
+            home:   Splash(isar: isar,)),
       ),
     );
   }

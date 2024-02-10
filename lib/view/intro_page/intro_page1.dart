@@ -3,12 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:isar/isar.dart';
 
 import 'package:todo_app/controller/controller.dart';
+import 'package:todo_app/view/intro_page/intro_page2.dart';
 import 'package:todo_app/widget/intro.dart';
 
 class Page1 extends StatefulWidget {
-  const Page1({super.key});
+  final Isar isar;
+  const Page1({super.key,required this.isar});
 
   @override
   State<Page1> createState() => _Page1State();
@@ -20,7 +23,7 @@ class _Page1State extends State<Page1> {
     setState(() {
       setState(() {
         selectedIndex++;
-        Get.toNamed('/intro2');
+        Get.offAll(Page2(isarl: widget.isar),transition: Transition.leftToRight);
       });
     });
   }
