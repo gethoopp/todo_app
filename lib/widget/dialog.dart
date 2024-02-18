@@ -4,8 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/localdata/data.dart';
+import 'package:todo_app/widget/category.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 
-Future<dynamic> dialog(Isar isar) {
+Future<dynamic> dialog(
+    Isar isar, BuildContext context, void Function(Time) onChange, Time timer) {
   return Get.dialog(Dialog(
     backgroundColor: Colors.grey[700],
     child: SizedBox(
@@ -66,20 +69,39 @@ Future<dynamic> dialog(Isar isar) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const ImageIcon(
-                  AssetImage('Assets/icon/timer.png'),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      showPicker(
+                        themeData: ThemeData.dark(),
+                        barrierColor: Colors.transparent,
+                        accentColor: Colors.blue,
+                        context: context,
+                        value: timer,
+                        sunrise:
+                            const TimeOfDay(hour: 6, minute: 0), // optional
+                        sunset:
+                            const TimeOfDay(hour: 18, minute: 0), // optional
+
+                        onChange: onChange,
+                      ),
+                    );
+                  },
+                  child: const ImageIcon(
+                    AssetImage('Assets/icon/timer.png'),
+                  ),
                 ),
                 const ImageIcon(
                   AssetImage('Assets/icon/flag.png'),
                 ),
-                const ImageIcon(AssetImage('Assets/icon/tag.png')),
+                GestureDetector(
+                    onTap: () => category(isar),
+                    child: const ImageIcon(AssetImage('Assets/icon/tag.png'))),
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: GestureDetector(
                     onTap: () {
-                     
-                    addTask(isar);
-                     
+                      addTask(isar);
                     },
                     child: const ImageIcon(
                       AssetImage('Assets/icon/send.png'),
@@ -96,14 +118,14 @@ Future<dynamic> dialog(Isar isar) {
   ));
 }
 
- addTask(Isar isar) async {
-    final data = Data()
-      ..description = descript.text
-      ..task = task.text;
+addTask(Isar isar) async {
+  final data = Data()
+    ..description = descript.text
+    ..task = task.text;
 
-    isar.writeTxn(() async {
-      await isar.datas.put(data);
-    });
+  isar.writeTxn(() async {
+    await isar.datas.put(data);
+  });
 
-    Get.back();
-  }
+  Get.back();
+}

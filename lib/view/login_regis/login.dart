@@ -19,7 +19,8 @@ import 'package:todo_app/widget/buttonsmall.dart';
 
 class Login extends StatefulWidget {
   final Isar isar;
-  const Login({super.key,required this.isar});
+
+  const Login({super.key, required this.isar});
 
   @override
   State<Login> createState() => _LoginState();
@@ -161,13 +162,14 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.all(Radius.circular(5))))),
             onPressed: () async {
               setState(() => Buttonstate.loaded);
-              Future.delayed(const Duration(seconds: 2));
+              await Future.delayed(const Duration(seconds: 2));
               setState(() => Buttonstate.succes);
-              Future.delayed(const Duration(seconds: 2));
+              await Future.delayed(const Duration(seconds: 2));
               setState(() => Buttonstate.init);
 
+              // ignore: use_build_context_synchronously
               context.read<AuthCubit>().login(email.text, password.text);
-                AwesomeNotifications().createNotification(
+              AwesomeNotifications().createNotification(
                 content: NotificationContent(
                     id: 1,
                     channelKey: 'UserNew',
@@ -176,7 +178,9 @@ class _LoginState extends State<Login> {
                         : 'Hello ${email.text} Welcome Back',
                     body: 'Ready To Be More Productive?'),
               );
-               Get.offAll(HomeScreen(isar: widget.isar));
+              Get.offAll(HomeScreen(
+                isar: widget.isar,
+              ));
             },
             child: const Text('Login')));
   }

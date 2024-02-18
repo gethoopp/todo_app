@@ -11,6 +11,7 @@ import 'package:todo_app/widget/intro.dart';
 
 class Page2 extends StatefulWidget {
   final Isar isarl;
+  
   const Page2({super.key,required this.isarl});
 
   @override
@@ -23,7 +24,7 @@ class _Page2State extends State<Page2> {
     setState(() {
       setState(() {
         selectedIndex++;
-        Get.offAll(Page3(isar: widget.isarl),transition: Transition.leftToRight);
+        Get.offAll(Page3(isar: widget.isarl),transition: Transition.leftToRight,curve: Curves.easeIn);
       });
     });
   }

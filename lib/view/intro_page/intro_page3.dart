@@ -10,7 +10,8 @@ import 'package:todo_app/widget/intro.dart';
 
 class Page3 extends StatefulWidget {
   final Isar isar;
-  const Page3({super.key, required this.isar});
+  
+  const Page3({super.key, required this.isar,});
 
   @override
   State<Page3> createState() => _Page3State();
@@ -21,8 +22,9 @@ class _Page3State extends State<Page3> {
   void UpdateState() {
     setState(() {
       setState(() {
-        Get.to(WelcomeBoard(isar: widget.isar),
-            transition: Transition.leftToRight);
+        Get.to(WelcomeBoard(isar: widget.isar,),
+            transition: Transition.leftToRight,
+            curve: Curves.easeIn);
       });
     });
   }

@@ -1,7 +1,7 @@
-
 // ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:day_night_time_picker/lib/state/time.dart';
 
 PageController pagecontroll = PageController();
 int selectedIndex = 0;
@@ -15,4 +15,8 @@ TextEditingController descript = TextEditingController();
 final passKey = GlobalKey<FormState>();
 final confirmKey = GlobalKey<FormState>();
 
-      
+Time time = Time(hour: 00, minute: 00, second: 00);
+
+void onchanged(Time timechanged) {
+  time = timechanged;
+}

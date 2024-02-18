@@ -6,11 +6,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
+import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/view/intro_page/intro_page1.dart';
+import 'package:todo_app/view/main_page/home.dart';
 
 class Splash extends StatefulWidget {
   final Isar isar;
-  const Splash({super.key,required this.isar});
+
+  const Splash({super.key, required this.isar});
 
   @override
   State<Splash> createState() => _MyWidgetState();
@@ -18,17 +21,21 @@ class Splash extends StatefulWidget {
 
 class _MyWidgetState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
-  void initState()  {
+  void initState() {
     super.initState();
-   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offAll(Page1(isar: widget.isar));
+      auth.currentUser != null
+          ? Get.offAll(HomeScreen(isar: widget.isar))
+          : Get.offAll(Page1(
+              isar: widget.isar,
+            ));
     });
   }
 
   @override
-  void dispose()  {
-   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
 
     super.dispose();

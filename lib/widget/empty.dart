@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Column datafirstisempty(Size size) {
+Column datafirstisempty(Size size,) {
  
     return Column(
         children: [
