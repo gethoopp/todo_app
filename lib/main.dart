@@ -12,9 +12,11 @@ import 'package:isar/isar.dart';
 
 import 'package:todo_app/cubit/auth_cubit.dart';
 import 'package:todo_app/firebase_options.dart';
+import 'package:todo_app/localdata/category.dart';
 import 'package:todo_app/localdata/data.dart';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:todo_app/splashscreen/splash_screen.dart';
 
 import 'package:todo_app/view/main_page/home.dart';
 
@@ -23,8 +25,9 @@ import 'package:todo_app/view/main_page/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.open([DataSchema], directory: dir.path);
-  // final isarone = await Isar.open([DataSchema], directory: dir.path);
+  final isar =
+      await Isar.open([DataSchema, CategorySchema], directory: dir.path);
+
   await AwesomeNotifications().initialize(null, [
     NotificationChannel(
       channelKey: 'UserNew',
@@ -71,7 +74,9 @@ class MyApp extends StatelessWidget {
         child: GetMaterialApp(
             title: 'Flutter app Todo',
             theme: ThemeData.dark(),
-            home: HomeScreen(isar: isar)),
+            home: Splash(
+              isar: isar,
+            )),
       ),
     );
   }

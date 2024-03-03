@@ -11,8 +11,9 @@ import 'package:todo_app/view/login_regis/regis.dart';
 
 class WelcomeBoard extends StatelessWidget {
   final Isar isar;
+  
 
-  const WelcomeBoard({super.key,required this.isar});
+  const WelcomeBoard({super.key,required this.isar,});
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class WelcomeBoard extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))))),
                           onPressed: () {
-                            Get.to( () => Login(isar: isar,), transition: Transition.downToUp);
+                            Get.to( () => Login(isar: isar, ), transition: Transition.downToUp);
                           },
                           child: const Text('Login'))),
                 ],

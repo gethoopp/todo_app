@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore: depend_on_referenced_packages
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:day_night_time_picker/lib/state/time.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
-import 'package:todo_app/localdata/data.dart';
+
 
 import 'package:todo_app/view/detail_menu/detail1.dart';
 import 'package:todo_app/view/detail_menu/detail2.dart';
@@ -46,10 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final isar = widget.isar;
+
     indexPage = [
       Detail1(
-        isar: isar,
+        isar: widget.isar,
         key: const PageStorageKey('page1'),
       ),
       const Detail2(
@@ -76,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print(widget.isar.datas.count().toString());
           dialog(widget.isar, context, onchanged, time);
-          print(time);
         },
         backgroundColor: Colors.blueGrey,
         hoverColor: Colors.green,

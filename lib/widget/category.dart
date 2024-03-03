@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
-import 'package:todo_app/localdata/data.dart';
+import 'package:todo_app/localdata/category.dart';
 
 Future<dynamic> category(Isar isar) {
   return Get.dialog(Dialog(
@@ -36,15 +36,7 @@ Future<dynamic> category(Isar isar) {
                   SliverGrid(
                       delegate: SliverChildListDelegate([
                         GestureDetector(
-                          onTap: () async {
-                            /*final data = Data()
-                              ..icons = 'Assets/icon/bread 1.png';
-                            isar.writeTxn(() async {
-                              await isar.datas.put(data);
-                            });*/
-
-                            Get.back();
-                          },
+                          onTap: () => addTask(isar, 'Assets/icon/bread 1.png'),
                           child: Container(
                             width: 64,
                             height: 75,
@@ -57,38 +49,50 @@ Future<dynamic> category(Isar isar) {
                                     const BorderRadius.all(Radius.circular(5))),
                           ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/briefcase 1.png')),
-                              color: Colors.red[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () =>
+                              addTask(isar, 'Assets/icon/briefcase 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/briefcase 1.png')),
+                                color: Colors.red[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/design (1) 1.png')),
-                              color: Colors.blue[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () =>
+                              addTask(isar, 'Assets/icon/design (1) 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/design (1) 1.png')),
+                                color: Colors.blue[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/megaphone 1.png')),
-                              color: Colors.amber[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () =>
+                              addTask(isar, 'Assets/icon/megaphone 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/megaphone 1.png')),
+                                color: Colors.amber[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
                         Container(
                           width: 64,
@@ -157,4 +161,14 @@ Future<dynamic> category(Isar isar) {
       ),
     ),
   ));
+}
+
+addTask(Isar isar, String icons) async {
+  final data = Category()..icons = icons;
+
+  isar.writeTxn(() async {
+    await isar.categorys.put(data);
+  });
+
+  Get.back();
 }

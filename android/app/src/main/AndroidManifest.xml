@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.RECIEVE_BOOT_COMPLETED" />
 
     <application
-        android:label="todo_app"
+        android:label="UpTodo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

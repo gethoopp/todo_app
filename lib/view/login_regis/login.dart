@@ -19,8 +19,9 @@ import 'package:todo_app/widget/buttonsmall.dart';
 
 class Login extends StatefulWidget {
   final Isar isar;
+ 
 
-  const Login({super.key, required this.isar});
+  const Login({super.key, required this.isar,});
 
   @override
   State<Login> createState() => _LoginState();
@@ -180,6 +181,7 @@ class _LoginState extends State<Login> {
               );
               Get.offAll(HomeScreen(
                 isar: widget.isar,
+                
               ));
             },
             child: const Text('Login')));

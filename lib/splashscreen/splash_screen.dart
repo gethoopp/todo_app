@@ -12,8 +12,9 @@ import 'package:todo_app/view/main_page/home.dart';
 
 class Splash extends StatefulWidget {
   final Isar isar;
+  
 
-  const Splash({super.key, required this.isar});
+  const Splash({super.key, required this.isar,});
 
   @override
   State<Splash> createState() => _MyWidgetState();
@@ -26,9 +27,10 @@ class _MyWidgetState extends State<Splash> with SingleTickerProviderStateMixin {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 2), () {
       auth.currentUser != null
-          ? Get.offAll(HomeScreen(isar: widget.isar))
+          ? Get.offAll(HomeScreen(isar: widget.isar, ))
           : Get.offAll(Page1(
               isar: widget.isar,
+              
             ));
     });
   }

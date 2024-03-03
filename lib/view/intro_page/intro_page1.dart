@@ -11,8 +11,9 @@ import 'package:todo_app/widget/intro.dart';
 
 class Page1 extends StatefulWidget {
   final Isar isar;
+  
 
-  const Page1({super.key,required this.isar});
+  const Page1({super.key,required this.isar,});
 
   @override
   State<Page1> createState() => _Page1State();

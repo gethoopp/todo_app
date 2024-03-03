@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
+import 'package:todo_app/cubit/auth_cubit.dart';
+import 'package:todo_app/localdata/category.dart';
 import 'package:todo_app/localdata/data.dart';
+import 'package:todo_app/welcome_board.dart';
+
 import 'package:todo_app/widget/empty.dart';
 import 'package:todo_app/widget/hasdata.dart';
 
 class Detail1 extends StatefulWidget {
   final Isar isar;
-  const Detail1({super.key, required this.isar});
+
+  const Detail1({
+    super.key,
+    required this.isar,
+  });
 
   @override
   State<Detail1> createState() => _Detail1State();
@@ -18,13 +29,23 @@ class _Detail1State extends State<Detail1> {
   int _dropdownValue = 1;
   bool _showHeader = true;
   bool _hasData = false;
+  bool ispresed = false;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer: const Drawer(),
+      drawer: Drawer(
+          child: Center(
+        child: ElevatedButton(
+            onPressed: () async {
+              context.read<AuthCubit>().logout();
+
+              Get.offAll(WelcomeBoard(isar: widget.isar));
+            },
+            child: const Text('LoGOut')),
+      )),
       body: Column(
         children: [
           if (_showHeader && _hasData) ...[
@@ -33,13 +54,15 @@ class _Detail1State extends State<Detail1> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(50),
-                  child: GestureDetector(
-                    onTap: () {
-                      print('ditekan');
-                      //Scaffold.hasDrawer(context);
-                    },
-                    child: const ImageIcon(AssetImage('Assets/icon/sort.png')),
-                  ),
+                  child: Builder(builder: (context) {
+                    return GestureDetector(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child:
+                          const ImageIcon(AssetImage('Assets/icon/sort.png')),
+                    );
+                  }),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: size.width * 0.15),
@@ -111,19 +134,38 @@ class _Detail1State extends State<Detail1> {
             child: StreamBuilder(
               stream: dataDat(),
               builder:
-                  (BuildContext context, AsyncSnapshot<List<Data>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                  (BuildContext context, AsyncSnapshot<List<Data>> snapshots) {
+                if (snapshots.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (snapshot.connectionState == ConnectionState.active) {
-                  if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                } else if (snapshots.connectionState ==
+                    ConnectionState.active) {
+                  if (snapshots.hasData && snapshots.data!.isNotEmpty) {
                     _hasData = true;
-                     _showHeader = true;
+                    _showHeader = true;
                     return ListView.builder(
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshots.data!.length,
                       itemBuilder: (context, index) {
-                        return hasadata(size, snapshot.data![index]);
+                        return StreamBuilder(
+                          stream: dataDats(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<Category>> snapshot) {
+                            if (snapshot.hasData) {
+                              return hasadata(
+                                  size,
+                                  snapshots.data![index],
+                                  snapshot.data![index],
+                                  widget.isar,
+                                  deleteTask,
+                                  );
+                            } else if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          },
+                        );
                       },
                     );
                   } else {
@@ -131,8 +173,8 @@ class _Detail1State extends State<Detail1> {
                     _showHeader = false;
                     return datafirstisempty(size);
                   }
-                } else if (snapshot.hasError) {
-                  return Text("Error: ${snapshot.error}");
+                } else if (snapshots.hasError) {
+                  return Text("Error: ${snapshots.error}");
                 } else {
                   _hasData = false;
                   _showHeader = false;
@@ -152,5 +194,19 @@ class _Detail1State extends State<Detail1> {
         .where(sort: Sort.asc)
         .build()
         .watch(fireImmediately: true);
+  }
+
+  Stream<List<Category>> dataDats() {
+    return widget.isar.categorys
+        .where(sort: Sort.asc)
+        .build()
+        .watch(fireImmediately: true);
+  }
+
+  deleteTask(Isar isar) {
+   
+    isar.writeTxn(() async {
+      await isar.datas.deleteAll([1]);
+    });
   }
 }

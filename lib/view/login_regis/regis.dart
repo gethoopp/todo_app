@@ -16,6 +16,7 @@ import 'package:todo_app/widget/buttonsmall.dart';
 
 class Regis extends StatefulWidget {
   final Isar isar;
+  
 
   const Regis({super.key, required this.isar,});
 
@@ -218,7 +219,7 @@ class _RegisState extends State<Regis> {
                     body: 'Let\'s Make your daily more productive!!!'),
               );
 
-              Get.offAll(HomeScreen(isar: widget.isar,) );
+              Get.offAll(HomeScreen(isar: widget.isar, ) );
             });
           },
           child: const Text('Register')),

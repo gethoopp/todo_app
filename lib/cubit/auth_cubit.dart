@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo_app/controller/controller.dart';
+import 'package:todo_app/welcome_board.dart';
 
 part 'auth_state.dart';
 
@@ -36,6 +37,24 @@ class AuthCubit extends Cubit<AuthState> {
           email: email, password: password);
 
       emit(AuthSucces(result.user));
+    } on FirebaseAuthException catch (e) {
+      final sncakBar = GetSnackBar(
+        snackPosition: SnackPosition.BOTTOM,
+        title: e.code,
+        messageText: Text(e.message.toString()),
+        backgroundColor: Colors.red,
+      );
+
+      emit(AuthErr(sncakBar));
+    }
+  }
+
+  void logout() async {
+    try {
+      await auth.signOut();
+      emit(AuthSucces(auth.currentUser));
+
+      print('berhasil sign out');
     } on FirebaseAuthException catch (e) {
       final sncakBar = GetSnackBar(
         snackPosition: SnackPosition.BOTTOM,

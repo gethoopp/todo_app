@@ -100,9 +100,9 @@ Future<dynamic> dialog(
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: GestureDetector(
-                    onTap: () {
-                      addTask(isar);
-                    },
+                    onTap: () => addTask(isar),
+                      
+                    
                     child: const ImageIcon(
                       AssetImage('Assets/icon/send.png'),
                       color: Colors.blueAccent,

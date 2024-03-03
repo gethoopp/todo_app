@@ -27,13 +27,8 @@ const DataSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'icons': PropertySchema(
-      id: 2,
-      name: r'icons',
-      type: IsarType.string,
-    ),
     r'task': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'task',
       type: IsarType.string,
     )
@@ -85,12 +80,6 @@ int _dataEstimateSize(
     }
   }
   {
-    final value = object.icons;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.task;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -107,8 +96,7 @@ void _dataSerialize(
 ) {
   writer.writeString(offsets[0], object.date);
   writer.writeString(offsets[1], object.description);
-  writer.writeString(offsets[2], object.icons);
-  writer.writeString(offsets[3], object.task);
+  writer.writeString(offsets[2], object.task);
 }
 
 Data _dataDeserialize(
@@ -120,9 +108,8 @@ Data _dataDeserialize(
   final object = Data();
   object.date = reader.readStringOrNull(offsets[0]);
   object.description = reader.readStringOrNull(offsets[1]);
-  object.icons = reader.readStringOrNull(offsets[2]);
   object.id = id;
-  object.task = reader.readStringOrNull(offsets[3]);
+  object.task = reader.readStringOrNull(offsets[2]);
   return object;
 }
 
@@ -138,8 +125,6 @@ P _dataDeserializeProp<P>(
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readStringOrNull(offset)) as P;
-    case 3:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -641,150 +626,6 @@ extension DataQueryFilter on QueryBuilder<Data, Data, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'icons',
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'icons',
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'icons',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsContains(String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'icons',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsMatches(String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'icons',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'icons',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterFilterCondition> iconsIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'icons',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<Data, Data, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1011,18 +852,6 @@ extension DataQuerySortBy on QueryBuilder<Data, Data, QSortBy> {
     });
   }
 
-  QueryBuilder<Data, Data, QAfterSortBy> sortByIcons() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'icons', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterSortBy> sortByIconsDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'icons', Sort.desc);
-    });
-  }
-
   QueryBuilder<Data, Data, QAfterSortBy> sortByTask() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'task', Sort.asc);
@@ -1058,18 +887,6 @@ extension DataQuerySortThenBy on QueryBuilder<Data, Data, QSortThenBy> {
   QueryBuilder<Data, Data, QAfterSortBy> thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterSortBy> thenByIcons() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'icons', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Data, Data, QAfterSortBy> thenByIconsDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'icons', Sort.desc);
     });
   }
 
@@ -1113,13 +930,6 @@ extension DataQueryWhereDistinct on QueryBuilder<Data, Data, QDistinct> {
     });
   }
 
-  QueryBuilder<Data, Data, QDistinct> distinctByIcons(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'icons', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<Data, Data, QDistinct> distinctByTask(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1144,12 +954,6 @@ extension DataQueryProperty on QueryBuilder<Data, Data, QQueryProperty> {
   QueryBuilder<Data, String?, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
-    });
-  }
-
-  QueryBuilder<Data, String?, QQueryOperations> iconsProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'icons');
     });
   }
 
