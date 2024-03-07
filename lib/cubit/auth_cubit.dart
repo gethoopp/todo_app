@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo_app/controller/controller.dart';
-import 'package:todo_app/welcome_board.dart';
+
 
 part 'auth_state.dart';
 

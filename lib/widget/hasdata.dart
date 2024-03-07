@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
+import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/localdata/category.dart';
 
 import 'package:todo_app/localdata/data.dart';
 
 Column hasadata(Size size, Data data, Category cat,Isar isar,dynamic Function(Isar isar) deleteTask) {
-  bool ispresed = true;
+  bool ispresed = false;
   return Column(
     children: [
       Container(
@@ -32,7 +33,7 @@ Column hasadata(Size size, Data data, Category cat,Isar isar,dynamic Function(Is
                 ),
               ),
               subtitle: Text(
-                '${data.description}',
+                'Today $time',
                 textAlign: TextAlign.justify,
                 maxLines: 1,
                 style: GoogleFonts.lato(

@@ -8,8 +8,8 @@ import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
 
 
-import 'package:todo_app/view/detail_menu/detail1.dart';
-import 'package:todo_app/view/detail_menu/detail2.dart';
+import 'package:todo_app/view/detail_menu/home.dart';
+import 'package:todo_app/view/detail_menu/calendar.dart';
 import 'package:todo_app/view/detail_menu/detail3.dart';
 import 'package:todo_app/view/detail_menu/detail4.dart';
 import 'package:todo_app/widget/dialog.dart';
@@ -52,8 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
         isar: widget.isar,
         key: const PageStorageKey('page1'),
       ),
-      const Detail2(
-        key: PageStorageKey('page2'),
+     Detail2(
+        isar: widget.isar,
+        key: const PageStorageKey('page2'),
       ),
       const Detail3(
         key: PageStorageKey('page3'),
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dialog(widget.isar, context, onchanged, time);
+          dialog(widget.isar, context, onchanged, time,onchangedDate);
         },
         backgroundColor: Colors.blueGrey,
         hoverColor: Colors.green,

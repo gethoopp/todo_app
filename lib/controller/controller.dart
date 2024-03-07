@@ -20,3 +20,7 @@ Time time = Time(hour: 00, minute: 00, second: 00);
 void onchanged(Time timechanged) {
   time = timechanged;
 }
+
+void onchangedDate(DateTime timer){
+  time =  Time(hour: timer.hour,minute: timer.minute );
+}

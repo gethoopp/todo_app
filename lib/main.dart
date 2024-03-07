@@ -72,9 +72,10 @@ class MyApp extends StatelessWidget {
       child: BlocProvider(
         create: (context) => AuthCubit(),
         child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
             title: 'Flutter app Todo',
             theme: ThemeData.dark(),
-            home: Splash(
+            home: HomeScreen(
               isar: isar,
             )),
       ),

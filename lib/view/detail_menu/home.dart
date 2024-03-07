@@ -12,6 +12,7 @@ import 'package:todo_app/welcome_board.dart';
 
 import 'package:todo_app/widget/empty.dart';
 import 'package:todo_app/widget/hasdata.dart';
+import 'package:todo_app/widget/mydrawer.dart';
 
 class Detail1 extends StatefulWidget {
   final Isar isar;
@@ -36,16 +37,7 @@ class _Detail1State extends State<Detail1> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer: Drawer(
-          child: Center(
-        child: ElevatedButton(
-            onPressed: () async {
-              context.read<AuthCubit>().logout();
-
-              Get.offAll(WelcomeBoard(isar: widget.isar));
-            },
-            child: const Text('LoGOut')),
-      )),
+      drawer:  MyDrawer(isar: widget.isar,),
       body: Column(
         children: [
           if (_showHeader && _hasData) ...[
@@ -205,8 +197,10 @@ class _Detail1State extends State<Detail1> {
 
   deleteTask(Isar isar) {
    
+   
     isar.writeTxn(() async {
-      await isar.datas.deleteAll([1]);
+      await isar.datas.delete(1);
+      await isar.categorys.delete(1);
     });
   }
 }

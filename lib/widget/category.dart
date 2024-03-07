@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
@@ -94,58 +96,75 @@ Future<dynamic> category(Isar isar) {
                                     const BorderRadius.all(Radius.circular(5))),
                           ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/mortarboard 1.png')),
-                              color: Colors.green[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: ()=>
+                              addTask(isar, 'Assets/icon/mortarboard 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/mortarboard 1.png')),
+                                color: Colors.green[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/music (1) 1.png')),
-                              color: Colors.pink[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () =>
+                              addTask(isar, 'Assets/icon/music (1) 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/music (1) 1.png')),
+                                color: Colors.pink[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage('Assets/icon/Vector.png')),
-                              color: Colors.amber[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () => addTask(isar,'Assets/icon/Vector.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage('Assets/icon/Vector.png')),
+                                color: Colors.amber[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage('Assets/icon/sport 1.png')),
-                              color: Colors.pink[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () => addTask(isar,'Assets/icon/sport 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage('Assets/icon/sport 1.png')),
+                                color: Colors.pink[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
-                        Container(
-                          width: 64,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'Assets/icon/video-camera 1.png')),
-                              color: Colors.lightGreen[300],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                        GestureDetector(
+                          onTap: () => addTask(isar,'Assets/icon/video-camera 1.png'),
+                          child: Container(
+                            width: 64,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'Assets/icon/video-camera 1.png')),
+                                color: Colors.lightGreen[300],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5))),
+                          ),
                         ),
                       ]),
                       gridDelegate:

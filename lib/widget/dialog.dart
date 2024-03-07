@@ -8,7 +8,7 @@ import 'package:todo_app/widget/category.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 
 Future<dynamic> dialog(
-    Isar isar, BuildContext context, void Function(Time) onChange, Time timer) {
+    Isar isar, BuildContext context, void Function(Time) onChange, Time timer,void Function(DateTime)? onChangeDateTime) {
   return Get.dialog(Dialog(
     backgroundColor: Colors.grey[700],
     child: SizedBox(
@@ -73,6 +73,7 @@ Future<dynamic> dialog(
                   onTap: () {
                     Navigator.of(context).push(
                       showPicker(
+                        blurredBackground: true,
                         themeData: ThemeData.dark(),
                         barrierColor: Colors.transparent,
                         accentColor: Colors.blue,
@@ -84,6 +85,9 @@ Future<dynamic> dialog(
                             const TimeOfDay(hour: 18, minute: 0), // optional
 
                         onChange: onChange,
+                        onChangeDateTime: (val){
+                          
+                        }
                       ),
                     );
                   },
