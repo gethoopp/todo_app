@@ -54,7 +54,7 @@ class AuthCubit extends Cubit<AuthState> {
       await auth.signOut();
       emit(AuthSucces(auth.currentUser));
 
-      print('berhasil sign out');
+    
     } on FirebaseAuthException catch (e) {
       final sncakBar = GetSnackBar(
         snackPosition: SnackPosition.BOTTOM,

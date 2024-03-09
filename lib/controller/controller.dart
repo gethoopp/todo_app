@@ -1,7 +1,10 @@
 // ignore: depend_on_referenced_packages
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
+import 'package:image_picker/image_picker.dart';
 
 PageController pagecontroll = PageController();
 int selectedIndex = 0;
@@ -14,6 +17,7 @@ TextEditingController task = TextEditingController();
 TextEditingController descript = TextEditingController();
 final passKey = GlobalKey<FormState>();
 final confirmKey = GlobalKey<FormState>();
+XFile? selectedImages;
 
 Time time = Time(hour: 00, minute: 00, second: 00);
 

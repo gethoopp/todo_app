@@ -16,9 +16,11 @@ import 'package:todo_app/widget/buttonsmall.dart';
 
 class Regis extends StatefulWidget {
   final Isar isar;
-  
 
-  const Regis({super.key, required this.isar,});
+  const Regis({
+    super.key,
+    required this.isar,
+  });
 
   @override
   State<Regis> createState() => _RegisState();
@@ -195,7 +197,9 @@ class _RegisState extends State<Regis> {
                   borderRadius: BorderRadius.all(Radius.circular(5))))),
           onPressed: () async {
             if (passKey.currentState!.validate() ==
-                confirmKey.currentState!.validate()) {
+                    confirmKey.currentState!.validate() &&
+                passKey.currentState != null &&
+                confirmKey.currentState != null) {
               setState(() => state = Buttonstate.loaded);
               await Future.delayed(const Duration(seconds: 2));
               setState(() => state = Buttonstate.succes);
@@ -219,7 +223,9 @@ class _RegisState extends State<Regis> {
                     body: 'Let\'s Make your daily more productive!!!'),
               );
 
-              Get.offAll(HomeScreen(isar: widget.isar, ) );
+              Get.offAll(HomeScreen(
+                isar: widget.isar,
+              ));
             });
           },
           child: const Text('Register')),

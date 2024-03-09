@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
-import 'package:todo_app/cubit/auth_cubit.dart';
+
 import 'package:todo_app/localdata/category.dart';
 import 'package:todo_app/localdata/data.dart';
-import 'package:todo_app/welcome_board.dart';
 
 import 'package:todo_app/widget/empty.dart';
 import 'package:todo_app/widget/hasdata.dart';
@@ -37,7 +35,9 @@ class _Detail1State extends State<Detail1> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer:  MyDrawer(isar: widget.isar,),
+      drawer: MyDrawer(
+        isar: widget.isar,
+      ),
       body: Column(
         children: [
           if (_showHeader && _hasData) ...[
@@ -145,12 +145,12 @@ class _Detail1State extends State<Detail1> {
                               AsyncSnapshot<List<Category>> snapshot) {
                             if (snapshot.hasData) {
                               return hasadata(
-                                  size,
-                                  snapshots.data![index],
-                                  snapshot.data![index],
-                                  widget.isar,
-                                  deleteTask,
-                                  );
+                                size,
+                                snapshots.data![index],
+                                snapshot.data![index],
+                                widget.isar,
+                                deleteTask,
+                              );
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else {
@@ -196,8 +196,6 @@ class _Detail1State extends State<Detail1> {
   }
 
   deleteTask(Isar isar) {
-   
-   
     isar.writeTxn(() async {
       await isar.datas.delete(1);
       await isar.categorys.delete(1);

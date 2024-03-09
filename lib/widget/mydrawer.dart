@@ -17,55 +17,227 @@ class MyDrawer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     // ignore: prefer_const_constructors
     return Drawer(
-        child: Center(
-            child: Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(size.height * 0.1),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  'Profile',
-                  style: GoogleFonts.lato(
-                      fontSize: 20, fontWeight: FontWeight.w400),
+      width: 320,
+      
+      child: CustomScrollView(
+        scrollDirection: Axis.vertical,
+        slivers: <Widget>[
+          SliverFillRemaining(
+            child: Center(
+                child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(size.height * 0.1),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          'Profile',
+                          style: GoogleFonts.lato(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 35,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage('Assets/image/user.jpg'),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: 58,
-              width: 120,
-              color: Colors.grey,
-              child: const Center(child: Text('10 Task Left')),
-            ),
-            Container(
-              height: 58,
-              width: 120,
-              color: Colors.grey,
-              child: const Center(
-                child: Text('5 Task Done'),
-              ),
-            )
-          ],
-        )
-      ],
-    )));
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 58,
+                      width: 120,
+                      color: Colors.grey,
+                      child: const Center(child: Text('10 Task Left')),
+                    ),
+                    Container(
+                      height: 58,
+                      width: 120,
+                      color: Colors.grey,
+                      child: const Center(
+                        child: Text('5 Task Done'),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: size.width * 0.5, top: 24),
+                  child: Text(
+                    'Settings',
+                    style: GoogleFonts.lato(
+                        fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {},
+                          child: Row(
+                            children: [
+                              const Icon(Icons.settings),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'App Settings',
+                                style: GoogleFonts.lato(
+                                    fontSize: 16, fontWeight: FontWeight.w400),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.29),
+                                child: const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: size.width * 0.5, top: 24),
+                  child: Text(
+                    'Account',
+                    style: GoogleFonts.lato(
+                        fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: size.width * 0.03),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                const Icon(Icons.person_sharp),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Change Account Name',
+                                  style: GoogleFonts.lato(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 50),
+                                  child:
+                                      const Icon(Icons.arrow_forward_outlined),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.03),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.key),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Change Account Password',
+                              style: GoogleFonts.lato(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 23),
+                              child: const Icon(Icons.arrow_forward_outlined),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.03),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.camera_alt_outlined),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Change Account Image',
+                              style: GoogleFonts.lato(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: size.width * 0.12),
+                              child: const Icon(Icons.arrow_forward_outlined),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                                        const SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                         context.read<AuthCubit>().logout();
+                         
+                         Get.offAll(WelcomeBoard(isar: isar));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.03),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.arrow_circle_left_outlined,color: Colors.red,),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Logout',
+                              style: GoogleFonts.lato(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                          
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+
+
+                  
+                    
+                  ],
+                ),
+              ],
+            )),
+          )
+        ],
+      ),
+    );
   }
 }

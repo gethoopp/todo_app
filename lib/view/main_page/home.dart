@@ -11,7 +11,7 @@ import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/view/detail_menu/home.dart';
 import 'package:todo_app/view/detail_menu/calendar.dart';
 import 'package:todo_app/view/detail_menu/detail3.dart';
-import 'package:todo_app/view/detail_menu/detail4.dart';
+import 'package:todo_app/view/detail_menu/profile_user.dart';
 import 'package:todo_app/widget/dialog.dart';
 
 class HomeScreen extends StatefulWidget {
