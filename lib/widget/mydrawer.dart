@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
+import 'package:todo_app/controller/controller.dart';
 import 'package:todo_app/cubit/auth_cubit.dart';
 
 import '../welcome_board.dart';
@@ -40,12 +41,17 @@ class MyDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Row(
+                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircleAvatar(
-                            radius: 35,
-                          )
+                          selectedImages != null
+                              ? CircleAvatar(
+                                  radius: 38,
+                                  backgroundImage: FileImage(selectedImages!),
+                                )
+                              : const CircleAvatar(
+                                  radius: 30,
+                                )
                         ],
                       ),
                     ],

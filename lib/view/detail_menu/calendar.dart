@@ -79,8 +79,8 @@ class _Detail2State extends State<Detail2> {
                     TextButton(
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(_colorsOutline),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(_colorsOutline),
+                            shape: WidgetStateProperty.all(
                                 const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(15))))),

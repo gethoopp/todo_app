@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
+import 'package:todo_app/controller/controller.dart';
 
 import 'package:todo_app/localdata/category.dart';
 import 'package:todo_app/localdata/data.dart';
@@ -41,7 +42,7 @@ class _Detail1State extends State<Detail1> {
       body: Column(
         children: [
           if (_showHeader && _hasData) ...[
-            // Your header UI elements
+            
             Row(
               children: [
                 Padding(
@@ -67,9 +68,16 @@ class _Detail1State extends State<Detail1> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: size.width * 0.25),
-                  child: const CircleAvatar(),
-                ),
+                  padding: EdgeInsets.only(left: size.width * 0.20),
+                  child: selectedImages != null
+                              ? CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: FileImage(selectedImages!),
+                                )
+                              : const CircleAvatar(
+                                  radius: 30,
+                                )),
+                
               ],
             ),
             SizedBox(

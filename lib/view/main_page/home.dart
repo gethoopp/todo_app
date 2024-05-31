@@ -59,8 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
       const Detail3(
         key: PageStorageKey('page3'),
       ),
-      const Detail4(
-        key: PageStorageKey('page4'),
+       Detail4(
+        isar: widget.isar,
+        key: const PageStorageKey('page4'),
       ),
     ];
   }
