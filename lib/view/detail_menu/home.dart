@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
 import 'package:todo_app/controller/controller.dart';
+import 'package:todo_app/controller/notifications/notif.dart';
 
 import 'package:todo_app/localdata/category.dart';
 import 'package:todo_app/localdata/data.dart';
@@ -30,6 +32,16 @@ class _Detail1State extends State<Detail1> {
   bool _showHeader = true;
   bool _hasData = false;
   bool ispresed = false;
+
+  @override
+  void initState() {
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotifCall.onActionReceivedMethod,
+        onNotificationCreatedMethod: NotifCall.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod: NotifCall.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod: NotifCall.onDismissActionReceivedMethod);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

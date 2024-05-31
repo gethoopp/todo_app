@@ -33,8 +33,8 @@ class Button extends StatelessWidget {
               child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.blueGrey),
-                      shape: MaterialStateProperty.all(
+                          WidgetStateProperty.all(Colors.blueGrey),
+                      shape: WidgetStateProperty.all(
                           const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
                                   Radius.circular(10))))),
@@ -68,8 +68,8 @@ class Button extends StatelessWidget {
               child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.blueGrey),
-                      shape: MaterialStateProperty.all(
+                          WidgetStateProperty.all(Colors.blueGrey),
+                      shape: WidgetStateProperty.all(
                           const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
                                   Radius.circular(10))))),

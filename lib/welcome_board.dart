@@ -82,8 +82,8 @@ class WelcomeBoard extends StatelessWidget {
                       child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.blueGrey),
-                              shape: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(Colors.blueGrey),
+                              shape: WidgetStateProperty.all(
                                   const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))))),
@@ -108,7 +108,7 @@ class WelcomeBoard extends StatelessWidget {
                   height: 48,
                   child: ElevatedButton(
                       style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                   side: BorderSide(color: Colors.blueGrey),
                                   borderRadius:

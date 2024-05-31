@@ -191,9 +191,9 @@ class _RegisState extends State<Regis> {
       height: 48,
       child: ElevatedButton(
           style: ButtonStyle(
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
-              backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-              shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              backgroundColor: WidgetStateProperty.all(Colors.blueGrey),
+              shape: WidgetStateProperty.all(const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5))))),
           onPressed: () async {
             if (passKey.currentState!.validate() ==

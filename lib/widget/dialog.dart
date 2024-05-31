@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,11 @@ import 'package:todo_app/widget/category.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 
 Future<dynamic> dialog(
-    Isar isar, BuildContext context, void Function(Time) onChange, Time timer,void Function(DateTime)? onChangeDateTime) {
+    Isar isar,
+    BuildContext context,
+    void Function(Time) onChange,
+    Time timer,
+    void Function(DateTime)? onChangeDateTime) {
   return Get.dialog(Dialog(
     backgroundColor: Colors.grey[700],
     child: SizedBox(
@@ -73,22 +78,19 @@ Future<dynamic> dialog(
                   onTap: () {
                     Navigator.of(context).push(
                       showPicker(
-                        blurredBackground: true,
-                        themeData: ThemeData.dark(),
-                        barrierColor: Colors.transparent,
-                        accentColor: Colors.blue,
-                        context: context,
-                        value: timer,
-                        sunrise:
-                            const TimeOfDay(hour: 6, minute: 0), // optional
-                        sunset:
-                            const TimeOfDay(hour: 18, minute: 0), // optional
+                          blurredBackground: true,
+                          themeData: ThemeData.dark(),
+                          barrierColor: Colors.transparent,
+                          accentColor: Colors.blue,
+                          context: context,
+                          value: timer,
+                          sunrise:
+                              const TimeOfDay(hour: 6, minute: 0), // optional
+                          sunset:
+                              const TimeOfDay(hour: 18, minute: 0), // optional
 
-                        onChange: onChange,
-                        onChangeDateTime: (val){
-                          
-                        }
-                      ),
+                          onChange: onChange,
+                          onChangeDateTime: onChangeDateTime)
                     );
                   },
                   child: const ImageIcon(
@@ -104,9 +106,19 @@ Future<dynamic> dialog(
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: GestureDetector(
-                    onTap: () => addTask(isar),
-                      
-                    
+                    onTap: () {
+                      addTask(isar);
+                      AwesomeNotifications().createNotification(
+                        schedule: NotificationAndroidCrontab.minutely(referenceDateTime: DateTime(2024,timer.minute)),
+                        content: NotificationContent(
+                            id: 2,
+                            channelKey: 'UserTask',
+                            title: 'Don\'t Forget with your task',
+                            body: 'Keep your spirit!!',
+                            
+                            ),
+                      );
+                    },
                     child: const ImageIcon(
                       AssetImage('Assets/icon/send.png'),
                       color: Colors.blueAccent,

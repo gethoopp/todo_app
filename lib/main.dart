@@ -46,6 +46,23 @@ void main() async {
       channelGroupName: 'User New',
     )
   ]);
+
+    await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: 'UserTask',
+      channelName: 'User Task',
+      channelDescription: 'Notification for User Task',
+      defaultColor: const Color(0xFF9D50DD),
+      ledColor: Colors.white,
+      channelGroupKey: 'user_new_Task',
+      importance: NotificationImportance.High,
+    )
+  ], channelGroups: [
+    NotificationChannelGroup(
+      channelGroupKey: 'user_new_Task',
+      channelGroupName: 'User Task',
+    )
+  ]);
   bool isPermit = await AwesomeNotifications().isNotificationAllowed();
 
   if (!isPermit) {

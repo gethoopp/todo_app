@@ -51,9 +51,9 @@ Column introMethod(Size size, VoidCallback UpdateState,
           height: 48,
           child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                       const Color.fromARGB(255, 138, 104, 216)),
-                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))))),
               onPressed: UpdateState,
               child: Text(
