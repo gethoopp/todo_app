@@ -4,13 +4,22 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Tech : Flutter, Dart, Firebase, Cubit, Isar Local database
 
-A few resources to get you started if this is your first Flutter project:
+1. Welcome Screan : 
+    a. Tombol Login Digunakan disaat sudah memiliki akun
+    b. Tombol Register Digunakan disaat user belum memeiliki akun 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Register Screen :
+    a. Sebelum Login User diharapkan untuk melakukan register terlebih dahulu 
+    b. Register Saat Hanya bisa menggunakan password dan email
+    c. Setelah Register Akan muncul notifikasi welcome user
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Notifikasi :
+    a. Notifikasi dibuat menggunakan package awesome notification / Local Notification
+
+4. add task :
+    a. Pada Bottom bar ada tombol untuk menambahkan task
+    b. Saat Menamabhkan task bagian icon tidak boleh kosong
+
+
