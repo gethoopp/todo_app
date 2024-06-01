@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-Tech : Flutter, Dart, Firebase, Cubit, Isar Local database
+Tech : Flutter, Dart, Firebase, Cubit, Isar Local database, Get Route
 
 1. Welcome Screan : 
     a. Tombol Login Digunakan disaat sudah memiliki akun
